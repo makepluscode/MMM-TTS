@@ -30,6 +30,21 @@ Module.register('MMM-TTS', {
             this.tts = payload;
             this.updateDom();
         }
+        else if (notification === 'SAY_YESPAPA') {
+            this.sendSocketNotification('TTS', "Yes, Papa");
+            this.tts = "Yes, Papa";
+            this.updateDom();
+        }
+        else if (notification === 'SAY_NOPAPA') {
+            this.sendSocketNotification('TTS', "No, Papa");
+            this.tts = "No, Papa";
+            this.updateDom();
+        }
+        else if (notification === 'SAY_AHAHAH') {
+            this.sendSocketNotification('TTS', "Ah. Ah. Ah.");
+            this.tts = "AhAhAh";
+            this.updateDom();
+        }
     },
 
     socketNotificationReceived(notification) {
@@ -41,10 +56,15 @@ Module.register('MMM-TTS', {
 
     getDom() {
         const wrapper = document.createElement('div');
-        if (this.config.debug === true) {
-            wrapper.classList.add('thin', 'small', 'bright');
-            wrapper.innerHTML = this.tts;
-        }
+
+        const img = document.createElement('img');
+        const txt = document.createElement('h1');
+
+        txt.innerHTML =  this.tts;
+
+        wrapper.appendChild(txt);
+        wrapper.appendChild(img);
+
         return wrapper;
     }
 });
