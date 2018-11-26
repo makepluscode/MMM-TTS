@@ -33,16 +33,19 @@ Module.register('MMM-TTS', {
         else if (notification === 'SAY_YESPAPA') {
             this.sendSocketNotification('TTS', "Yes, Papa");
             this.tts = "Yes, Papa";
+            this.img = "yespapa.png";
             this.updateDom();
         }
         else if (notification === 'SAY_NOPAPA') {
             this.sendSocketNotification('TTS', "No, Papa");
             this.tts = "No, Papa";
+            this.img = "nopapa.png";
             this.updateDom();
         }
         else if (notification === 'SAY_AHAHAH') {
             this.sendSocketNotification('TTS', "Ah. Ah. Ah.");
             this.tts = "AhAhAh";
+            this.img = "ahahah.png";
             this.updateDom();
         }
     },
@@ -58,12 +61,17 @@ Module.register('MMM-TTS', {
         const wrapper = document.createElement('div');
 
         const img = document.createElement('img');
-        const txt = document.createElement('h1');
+        const txt = document.createElement('p');
 
         txt.innerHTML =  this.tts;
 
-        wrapper.appendChild(txt);
+        if(this.img) {
+            img.src = this.file('./resources/'+this.img);
+            img.setAttribute('height', 160);
+        }
+
         wrapper.appendChild(img);
+        wrapper.appendChild(txt);        
 
         return wrapper;
     }
